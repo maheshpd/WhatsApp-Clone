@@ -7,7 +7,7 @@
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -31,6 +31,7 @@
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:layout_below="@+id/appBar"
             android:background="@color/purple_500"
             app:tabGravity="fill"
             app:tabIndicatorColor="@color/white"
@@ -43,11 +44,23 @@
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/view_pager"
+            android:layout_below="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="50dp"
             android:visibility="visible"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-    </LinearLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_action"
+            android:src="@android:drawable/stat_notify_chat"
+            android:layout_width="wrap_content"
+            app:tint="@color/white"
+            app:backgroundTint="@color/purple_500"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="15dp" />
+
+    </RelativeLayout>
 </layout>
