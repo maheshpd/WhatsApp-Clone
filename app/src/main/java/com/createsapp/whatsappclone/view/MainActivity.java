@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.Menu;
@@ -20,6 +21,7 @@ import com.createsapp.whatsappclone.databinding.ActivityMainBinding;
 import com.createsapp.whatsappclone.menu.CallsFragment;
 import com.createsapp.whatsappclone.menu.ChatsFragment;
 import com.createsapp.whatsappclone.menu.StatusFragment;
+import com.createsapp.whatsappclone.view.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,8 +111,22 @@ public class MainActivity extends AppCompatActivity {
         switch (id) {
             case R.id.menu_search:
                 Toast.makeText(MainActivity.this, "Action Search", Toast.LENGTH_SHORT).show();
-            case R.id.menu_more:
-                Toast.makeText(MainActivity.this, "Action More", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.action_new_group:
+                Toast.makeText(MainActivity.this, "Action New Group", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.action_wa_web:
+                Toast.makeText(MainActivity.this, "Action Web", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.action_starred_message:
+                Toast.makeText(MainActivity.this, "Action Starred Message", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.action_settings:
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                break;
         }
 
         return super.onOptionsItemSelected(item);

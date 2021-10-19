@@ -13,6 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WhatsAppClone">
         <activity
+            android:name=".view.settings.SettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".view.auth.SetUserInfoActivity"
+            android:exported="true" />
+        <activity
             android:name=".view.auth.PhoneLoginActivity"
             android:exported="true" />
         <activity

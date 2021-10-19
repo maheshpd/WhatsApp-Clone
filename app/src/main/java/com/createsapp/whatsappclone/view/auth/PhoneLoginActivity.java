@@ -16,8 +16,10 @@ import android.widget.Toast;
 
 import com.createsapp.whatsappclone.R;
 import com.createsapp.whatsappclone.databinding.ActivityPhoneLoginBinding;
+import com.createsapp.whatsappclone.model.user.Users;
 import com.createsapp.whatsappclone.view.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
@@ -26,6 +28,8 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.concurrent.TimeUnit;
 
@@ -40,7 +44,8 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
     private ProgressDialog progressDialog;
 
-    String[] country = {"india", "USA", "China", "Japan", "Other"};
+    private FirebaseUser firebaseUser;
+    private FirebaseFirestore firestore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,13 @@ public class PhoneLoginActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_phone_login);
 
         mAuth = FirebaseAuth.getInstance();
+        firestore = FirebaseFirestore.getInstance();
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (firebaseUser != null) {
+            startActivity(new Intent(this, SetUserInfoActivity.class));
+        }
+
         progressDialog = new ProgressDialog(this);
         binding.btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +68,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                     progressDialog.setMessage("Please wait");
                     progressDialog.show();
 
-                    String phone = "+"+binding.edCodeCountry.getText().toString()+binding.edPhone.getText().toString();
+                    String phone = "+" + binding.edCodeCountry.getText().toString() + binding.edPhone.getText().toString();
                     startPhoneNumberVerification(phone);
                 } else {
                     progressDialog.setMessage("Verifying ..");
@@ -113,7 +125,34 @@ public class PhoneLoginActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             Log.d(TAG, "signInWithCredential success");
                             FirebaseUser user = task.getResult().getUser();
-                            startActivity(new Intent(PhoneLoginActivity.this, MainActivity.class));
+                            startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
+//                            if (user != null) {
+//                                String userID = user.getUid();
+//                                Users users = new Users(
+//                                        userID,
+//                                        "",
+//                                        user.getPhoneNumber(),
+//                                        "",
+//                                        "",
+//                                        "",
+//                                        "",
+//                                        "",
+//                                        "",
+//                                        ""
+//                                );
+//
+//                                firestore.collection("User")
+//                                        .document("UserInfo")
+//                                        .collection(userID)
+//                                        .add(users).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                                    @Override
+//                                    public void onSuccess(DocumentReference documentReference) {
+//                                        startActivity(new Intent(PhoneLoginActivity.this, SetUserInfoActivity.class));
+//                                    }
+//                                });
+//                            } else {
+//                                Toast.makeText(getApplicationContext(), "Something Error", Toast.LENGTH_SHORT).show();
+//                            }
                         } else {
 
                             progressDialog.dismiss();
@@ -131,4 +170,6 @@ public class PhoneLoginActivity extends AppCompatActivity {
         PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, code);
         signInWithPhoneAuthCredential(credential);
     }
+
+
 }

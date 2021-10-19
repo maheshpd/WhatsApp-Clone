@@ -41,10 +41,10 @@ public class ChatsFragment extends Fragment {
     }
 
     private void getChatList() {
-        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
-        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
-        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
-        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
+//        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
+//        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
+//        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
+//        list.add(new ChatList("11","LyMain","Hello Friend","8/10/2021","https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc5OTk2ODUyMTMxNzM0ODcy/gettyimages-1229892983-square.jpg"));
 
         recyclerView.setAdapter(new ChatListAdapter(list,getContext()));
 
