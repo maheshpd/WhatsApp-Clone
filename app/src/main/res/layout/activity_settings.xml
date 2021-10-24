@@ -26,6 +26,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/in_profile"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -45,6 +46,7 @@
                         android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tv_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="Username"
