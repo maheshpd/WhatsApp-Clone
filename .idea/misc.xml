@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.2907692307692308" />
         <entry key="app/src/main/res/layout/activity_welcome_screen.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/bottom_sheet_edit_name.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/bottom_sheet_pick.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_calls.xml" value="0.2907692307692308" />
         <entry key="app/src/main/res/layout/fragment_chats.xml" value="0.2907692307692308" />

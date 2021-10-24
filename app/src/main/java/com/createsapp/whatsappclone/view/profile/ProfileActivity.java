@@ -15,12 +15,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.WindowManager;
 import android.webkit.MimeTypeMap;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.createsapp.whatsappclone.R;
 import com.createsapp.whatsappclone.databinding.ActivityProfileBinding;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
     private FirebaseUser firebaseUser;
     private FirebaseFirestore firestore;
 
-    private BottomSheetDialog bottomSheetDialog;
+    private BottomSheetDialog bottomSheetDialog,bsDialogEditname;
     private ProgressDialog progressDialog;
 
     private int IMAGE_GALLERY_REQUEST = 111;
@@ -77,6 +80,66 @@ public class ProfileActivity extends AppCompatActivity {
                 showBottomSheetPickPhoto();
             }
         });
+
+        binding.InEditName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showBottomSheetEditName();
+            }
+        });
+    }
+
+    private void showBottomSheetEditName() {
+        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.bottom_sheet_edit_name, null);
+
+        view.findViewById(R.id.btn_cancel).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                bsDialogEditname.dismiss();
+            }
+        });
+
+        final EditText edUserName = view.findViewById(R.id.ed_username);
+
+        view.findViewById(R.id.btn_save).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TextUtils.isEmpty(edUserName.getText().toString())){
+                    Toast.makeText(getApplicationContext(), "Name can't be empty", Toast.LENGTH_SHORT).show();
+                } else {
+                    updateName(edUserName.getText().toString());
+                    bsDialogEditname.dismiss();
+                }
+
+
+            }
+        });
+
+        bsDialogEditname = new BottomSheetDialog(this);
+        bsDialogEditname.setContentView(view);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Objects.requireNonNull(bsDialogEditname.getWindow()).addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+        }
+
+        bsDialogEditname.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                bsDialogEditname = null;
+            }
+        });
+
+        bsDialogEditname.show();
+    }
+
+    private void updateName(String newName) {
+            firestore.collection("User").document(firebaseUser.getUid()).update("userName",newName).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Toast.makeText(getApplicationContext(), "Update Successful", Toast.LENGTH_SHORT).show();
+                    getInfo();
+                }
+            });
     }
 
     private void showBottomSheetPickPhoto() {
@@ -168,7 +231,7 @@ public class ProfileActivity extends AppCompatActivity {
                     hashMap.put("imageProfile", sdownload_uri);
 
                     progressDialog.dismiss();
-                    firestore.collection("Users").document(firebaseUser.getUid()).update(hashMap)
+                    firestore.collection("User").document(firebaseUser.getUid()).update(hashMap)
                             .addOnSuccessListener(new OnSuccessListener<Void>() {
                                 @Override
                                 public void onSuccess(Void unused) {
